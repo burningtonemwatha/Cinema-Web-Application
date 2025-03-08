@@ -1,0 +1,182 @@
+/* Import bold font for headings */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
+
+/* Apply to the whole page */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('../images/wallpaper.jpg') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+}
+
+/* Subtle blur overlay */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+    z-index: -1;
+}
+
+/* General form container styling */
+.form-container {
+    width: 380px;
+    padding: 25px 30px;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    backdrop-filter: blur(12px);
+    text-align: center;
+}
+
+/* Headings with distinct bold font */
+.form-container h2, .dashboard h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+/* Labels aligned to the left */
+label {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+/* Input fields */
+input, select, textarea {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    font-size: 14px;
+}
+
+input::placeholder, textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Submit button */
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #ffcc00;
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 15px;
+}
+
+button[type="submit"]:hover {
+    background-color: #ff9900;
+    transform: scale(1.03);
+}
+
+/* Links styling */
+a {
+    color: #ffcc00;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Register and login link container */
+.register-link, .login-link {
+    margin-top: 15px;
+    font-size: 14px;
+    color: white;
+}
+
+/* Slight difference between register and login forms */
+.register-container {
+    width: 360px;
+}
+
+.login-container {
+    width: 400px;
+}
+
+/* Unique Styling for the Dashboard */
+.dashboard {
+    width: 450px;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    backdrop-filter: blur(15px);
+    text-align: center;
+    color: white;
+}
+
+.dashboard h2 {
+    font-size: 26px;
+    color: #ffcc00;
+}
+
+.dashboard p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* Form inside the dashboard */
+.dashboard form {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.dashboard input, .dashboard select, .dashboard textarea {
+    width: 90%;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: white;
+}
+
+.dashboard button {
+    background-color: #ffcc00;
+    color: black;
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+    .form-container, .dashboard {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+select {
+    background-color: rgba(255, 255, 255, 0.2); /* Dark background */
+    color: white; /* Visible text */
+    border: 1px solid white; /* White border */
+}
+
+select option {
+    background-color: grey; /* Background for dropdown items */
+    color: white; /* Text color */
+}

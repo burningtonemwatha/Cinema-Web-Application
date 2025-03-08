@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    .logout {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      color: yellow;
+      text-decoration: none;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      position: relative;
+      margin-top: 10px;
+    }
+
+    .title-container {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .title {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .form-container {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 10px;
+      width: 85%;
+      text-align: left;
+      position: absolute;
+      left: 5%;
+      top: 390%;
+      transform: translateY(-50%);
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+
+    input, select, textarea {
+      width: 98%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      background-color: yellow;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #responseMessage {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body class="dashboard-bg">
+  <a href="/logout" class="logout">Logout</a>
+
+  <div class="title-container">
+    <h2 class="title">Welcome to your Dashboard!</h2>
+    <p>Tell us about your favorite cinematic universe:</p>
+
+    <div class="form-container">
+      <form id="cinemaForm">
+        <label for="favoriteMovie">What is your favorite movie?</label>
+        <input type="text" id="favoriteMovie" name="favoriteMovie" required>
+
+        <label for="favoriteCharacter">Who is your favorite character?</label>
+        <input type="text" id="favoriteCharacter" name="favoriteCharacter" required>
+
+        <label for="universe">Which cinematic universe do you prefer?</label>
+        <select id="universe" name="universe" required>
+          <option value="Marvel">Marvel</option>
+          <option value="DC">DC</option>
+          <option value="Star Wars">Star Wars</option>
+          <option value="Harry Potter">Harry Potter</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="favoriteGenre">What is your favorite movie genre?</label>
+        <input type="text" id="favoriteGenre" name="favoriteGenre" required>
+
+        <label for="favoriteDirector">Who is your favorite director?</label>
+        <input type="text" id="favoriteDirector" name="favoriteDirector" required>
+
+        <label for="comments">Any other thoughts?</label>
+        <textarea id="comments" name="comments"></textarea>
+
+        <button type="submit">Submit</button>
+      </form>
+
+      <div id="responseMessage"></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("cinemaForm");
+
+    if (!form) {
+        console.error("Form not found!");
+        return;
+    }
+
+    form.addEventListener("submit", async function(event) {
+        event.preventDefault(); // Prevent page reload
+        console.log("Form submitted!");
+
+        const formData = {
+            favoriteMovie: document.getElementById("favoriteMovie").value,
+            favoriteCharacter: document.getElementById("favoriteCharacter").value,
+            universe: document.getElementById("universe").value,
+            favoriteGenre: document.getElementById("favoriteGenre").value,
+            favoriteDirector: document.getElementById("favoriteDirector").value,
+            comments: document.getElementById("comments").value || "None"
+        };
+
+        try {
+            const response = await fetch("/submit-cinema", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" }, // ✅ Important!
+                body: JSON.stringify(formData) // ✅ Convert to JSON
+            });
+
+            const result = await response.json();
+            console.log("Server response:", result);
+
+            document.getElementById("responseMessage").innerText = result.message;
+        } catch (error) {
+            console.error("Error sending request:", error);
+            document.getElementById("responseMessage").innerText = "An error occurred. Check console.";
+        }
+    });
+});
+
+  </script>
+</body>
+</html>
